@@ -7,8 +7,10 @@ from rest_framework_simplejwt.tokens import AccessToken
 
 from config import settings
 from habits.models import Place, Action, Habit
+from habits.permissions import IsOwnerOrStaff
 from habits.services import set_schedule, delete_schedule
 from habits.tasks import send_telegram_message
+from habits.views import HabitRetrieveAPIView
 from users.models import User
 
 
@@ -249,6 +251,18 @@ class HabitTestCase(APITestCase):
         }
 
         send_telegram_message.apply_async(kwargs=kwargs)
+
+    # def test_has_permission_user_is_owner(self):
+    #     user = self.user
+    #     user.is_staff = False
+    #     habit = self.useful_habit
+    #     request = self.client.get(f'/habits/{habit.pk}/')
+    #     request.user = user
+    #     view = HabitRetrieveAPIView()
+    #     view.kwargs = {'pk': habit.pk}
+    #     permission = IsOwnerOrStaff()
+    #
+    #     self.assertTrue(permission.has_permission(request, view))
 
 
 
