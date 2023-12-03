@@ -40,24 +40,17 @@ services:
     tty: true
     command: celery -A config worker -l INFO
     depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_started
-      app:
-        condition: service_started
+      - redis
+      - app
 
   celery_beat:
     build: .
     tty: true
     command: celery -A config beat -l info -S django
     depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_started
-      app:
-        condition: service_started
+      - redis
+      - app
+    restart: always
 
 
 volumes:
