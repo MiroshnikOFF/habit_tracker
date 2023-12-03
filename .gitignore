@@ -3,5 +3,4 @@ venv/
 .env
 __pycach__/
 .coverage
-.env_docker
 pg_data/

@@ -10,7 +10,7 @@ services:
   db:
     image: postgres
     env_file:
-      - .env_docker
+      - .env
     volumes:
       - ./pg_data:/var/lib/postgresql/data/pgdata
     ports:
