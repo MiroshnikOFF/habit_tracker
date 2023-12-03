@@ -51,7 +51,6 @@ services:
     build: .
     tty: true
     command: celery -A config beat -l info -S django
-#    command: sh -c "python manage.py migrate && celery -A config beat -l info -S django"
     depends_on:
       db:
         condition: service_healthy
